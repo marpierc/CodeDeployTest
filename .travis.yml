@@ -1,0 +1,50 @@
+language: java
+jdk:
+  - oraclejdk8
+sudo: false
+install: true
+
+before_script:
+  - cd CodeDeployTest/scripts
+  - source replace_props.sh
+  - cd -
+
+script: cd "CodeDeployTest" && echo "mvn -e clean install"
+
+before_deploy:
+  - cd 
+  - zip -r CodeDeployTest.zip CodeDeployTest || true
+  - mkdir -p "dpl_cd_upload"
+  - mv CodeDeployTest.zip dpl_cd_upload/CodeDeployTest.zip || true
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY
+    local_dir: dpl_cd_upload
+    bucket: airavata-develop
+    region: us-east-1
+    skip_cleanup: true
+    acl: public_read
+    detect_encoding: true
+    on:
+      repo: apache/airavata
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: airavata-develop
+    key: CodeDeployTest.zip
+    bundle_type: zip
+    application: Airavata-CodeDeploy
+    deployment_group: Airavata-CodeDeploy
+    region: us-east-1
+    on:
+      repo: marpierc/CodeDeployTest
+      all_branches: true
+after_deploy:
+  - echo "Performing after deploy procedures..."
+notifications:
+  email:
+    recipients:
+      - marpierc@iu.edu
