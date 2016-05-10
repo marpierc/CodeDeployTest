@@ -12,7 +12,7 @@ before_script:
 script: cd . && echo "mvn -e clean install"
 
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR/marpierc/CodeDeployTest
+  - cd $TRAVIS_BUILD_DIR
   - zip -r CodeDeployTest.zip . || true
   - mkdir -p "dpl_cd_upload"
   - mv CodeDeployTest.zip dpl_cd_upload/CodeDeployTest.zip || true
