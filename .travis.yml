@@ -13,9 +13,9 @@ script: cd . && echo "mvn -e clean install"
 
 before_deploy:
   - cd $TRAVIS_BUILD_DIR
-  - zip -r CodeDeployTest.zip . || true
+  - tar -cf CodeDeployTest.tar . || true
   - mkdir -p "dpl_cd_upload"
-  - mv CodeDeployTest.zip dpl_cd_upload/CodeDeployTest.zip || true
+  - mv CodeDeployTest.tar dpl_cd_upload/CodeDeployTest.tar || true
 
 deploy:
   - provider: s3
@@ -34,8 +34,8 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
     secret_access_key: $AWS_SECRET_KEY
     bucket: airavata-develop
-    key: CodeDeployTest.zip
-    bundle_type: zip
+    key: CodeDeployTest.tar
+    bundle_type: tar
     application: MEP-Test-CodeDeploy
     deployment_group: MEP-Test-CodeDeploy
     region: us-east-1
