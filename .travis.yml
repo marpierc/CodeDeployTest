@@ -36,8 +36,8 @@ deploy:
     bucket: airavata-develop
     key: CodeDeployTest.zip
     bundle_type: zip
-    application: Airavata-CodeDeploy
-    deployment_group: Airavata-CodeDeploy
+    application: MEP-Test-CodeDeploy
+    deployment_group: MEP-Test-CodeDeploy
     region: us-east-1
     on:
       repo: marpierc/CodeDeployTest
