@@ -7,12 +7,12 @@ install: true
 before_script:
   - cd scripts
   - source replace_props.sh
-  - cd
+  - cd -
 
 script: cd . && echo "mvn -e clean install"
 
 before_deploy:
-  - cd
+  - cd -
   - cd CodeDeployTest
   - zip -r CodeDeployTest.zip . || true
   - mkdir -p "dpl_cd_upload"
