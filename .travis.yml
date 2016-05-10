@@ -5,7 +5,7 @@ sudo: false
 install: true
 
 before_script:
-  - cd CodeDeployTest/scripts
+  - cd scripts
   - source replace_props.sh
   - cd -
 
