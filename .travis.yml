@@ -13,6 +13,7 @@ script: cd . && echo "mvn -e clean install"
 
 before_deploy:
   - cd -
+  - echo `pwd`
   - cd CodeDeployTest
   - zip -r CodeDeployTest.zip . || true
   - mkdir -p "dpl_cd_upload"
