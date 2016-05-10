@@ -7,10 +7,9 @@ install: true
 before_script:
   - cd scripts
   - source replace_props.sh
-  - pwd
   - cd
 
-script: cd "marpierc/CodeDeployTest" && echo "mvn -e clean install"
+script: cd . && echo "mvn -e clean install"
 
 before_deploy:
   - cd 
