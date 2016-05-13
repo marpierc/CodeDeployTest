@@ -3,7 +3,9 @@ jdk:
   - oraclejdk8
 sudo: true
 addons:
-   mariadb: '10.0'
+   mariadb: '10.1'
+services:
+   - rabbitmq
 install: true
 
 before_script:
