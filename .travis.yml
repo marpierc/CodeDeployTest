@@ -9,6 +9,7 @@ services:
 install: true
 
 before_script:
+  - mysql "create database app_catalog;"
   - cd scripts
   - source replace_props.sh
   - cd -
