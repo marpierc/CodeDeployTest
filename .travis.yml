@@ -21,7 +21,7 @@ before_script:
    - sudo apt-get install apache2
    - sudo apt-get install php-soap
    - sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
-   - sudo apt-get install composer
+   #- sudo apt-get install composer
 
 script:
     # Build the code
@@ -32,7 +32,9 @@ script:
     - echo "Updating airavata-server.properties"
     # Start the Airavata server
     - echo "Starting the server."
-    # 
+    # Get the PGA
+    - cd $TRAVIS_BUILD_DIR    
+    - git clone https://github.com/apache/airavata-php-gateway.git
     
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
