@@ -4,7 +4,7 @@ jdk:
 sudo: true
 addons:
   mariadb: '10.1'
-  sauce_connect: true
+  #sauce_connect: true
 services:
    rabbitmq
 install: true
@@ -12,11 +12,11 @@ before_script:
    - sudo apt-get install zookeeper
    #- sudo mysql -e 'create database app_catalog;'
    #- sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
-   - cd scripts
+   - echo $TRAVIS_BUILD_DIR
+   - cd $TRAVIS_BUILD_DIR/scripts
    - source db-setup.sh
    - source before-install.sh	
-   - cd -
-script: cd . && echo "mvn -e clean install"
+script: cd $TRAVIS_BUILD_DIR && echo "mvn -e clean install"
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
    - tar -cf CodeDeployTest.tar . || true
