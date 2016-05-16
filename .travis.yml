@@ -9,6 +9,7 @@ services:
 install: true
 
 before_script:
+  - sudo apt-get install zookeeper
   - mysql -e 'create database app_catalog;'
   - cd scripts
   - source replace_props.sh
