@@ -7,16 +7,14 @@ addons:
   sauce_connect: true
 services:
    rabbitmq
-before_install:
-   - cd scripts
-   - source before-install.sh
 install: true
 before_script:
    - sudo apt-get install zookeeper
-   - sudo mysql -e 'create database app_catalog;'
-   - sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
+   #- sudo mysql -e 'create database app_catalog;'
+   #- sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
    - cd scripts
    - source replace_props.sh
+   - source before-install.sh	
    - cd -
 script: cd . && echo "mvn -e clean install"
 before_deploy:
