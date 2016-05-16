@@ -18,9 +18,11 @@ before_script:
    - source rabbitmq-setup.sh
    - source db-setup.sh
    #PHP
-   - sudo apt-get apache2
-   - sudo apt-get php-soap
-   - sudo apt-get php
+   - sudo apt-get install apache2
+   - sudo apt-get install php-soap
+   - sudo apt-get install php
+   - sudo apt-get install composer
+   - sudo apt-get install php-mcrypt
 
 script:
     # Build the code
