@@ -9,14 +9,19 @@ services:
    rabbitmq
 install: true
 before_script:
+   # Zookeeper
    - sudo apt-get install zookeeper
-   #- sudo mysql -e 'create database app_catalog;'
-   #- sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
-   - echo $TRAVIS_BUILD_DIR
+   # Set up rabbitmq 
+   - rabbitmqctl add_user airavata airavata
+   - rabbitmqctl add_vhost messaging
+   - rabbitmqctl set_permissions -p messaging airavata "." "." ".*"
+   # Database setup. You can also run these with sudo mysql -e <cmd_to_run>
    - cd $TRAVIS_BUILD_DIR/scripts
    - source before-install.sh		
    - source db-setup.sh
-script: cd $TRAVIS_BUILD_DIR && echo "mvn -e clean install"
+script:
+    - cd $TRAVIS_BUILD_DIR
+    - echo "mvn -e clean install"
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
    - tar -cf CodeDeployTest.tar . || true
