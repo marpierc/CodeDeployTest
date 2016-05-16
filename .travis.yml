@@ -11,13 +11,17 @@ install: true
 before_script:
    # Zookeeper
    - sudo apt-get install zookeeper
+   - sudo apt-get install zookeeperd
+   - service zookeeper start
    # Execute scripts
    - cd $TRAVIS_BUILD_DIR/scripts	
    - source rabbitmq-setup.sh
    - source db-setup.sh
 script:
     - cd $TRAVIS_BUILD_DIR
+    # Build the code
     - echo "mvn -e clean install"
+    
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
    - tar -cf CodeDeployTest.tar . || true
