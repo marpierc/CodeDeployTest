@@ -1,56 +1,57 @@
 language: java
 jdk:
-  - oraclejdk8
+   - oraclejdk8
 sudo: true
 addons:
-   mariadb: '10.1'
+  mariadb: '10.1'
+  sauce_connect:
+     username: marpierc
+     access_key:
+        secure: KOtwGY6LTdi3cFM5wWhktw59AX3Tt9ovHnEjMYbeOs22+3Qipahja/TZaRnHnLsWAfq2MptGJYz/5hDMZbllWfzUi/i7Xdj4bnmPVJmKtMLe37IEr/cLb3kemtjKPJH9Tg5dirWY1G6dS7KxrwG4PTBRiisFpTOXf8F6SRrFvoOFDC8Hqlhg78ocmg7FJzJ584aUQoiSCw+egFpnt3nx68rFJ0fSZQg/PKs4+JXHDX3bvJv7uFLkvUx+mM1bQmuIsg8i/9uDGCVofNcZs1EH7xqPxeL3+lWolpPZxcNSuLHEkVajvQ2ovtAuoBpPk3sjZXdzg31FUlPgeJSx5kyH7LRsiXDvJ1NA7xlZwKDaTG7vRWEG/7ywsA6koLp8CYQWJ8U3HIjTCib3Hy1BI+Vwy4HX/QZGaFa/LBlMHx1L3/PBz4MhAx/cVzR31TJgK43aCHu9rppcw1asi53Z84PbVhhIGqpWR8JEbHbhSvvWVr3AX6Yoslo5aIa0pdpTx+Mw4pEG84rNQ1KxUYfjYHHOO4OFImugPVAojLVStJGGW5LTNFU6ECQNBh6nLHLEebY4jvPpI8NBYb92xdm8Kh2YwPVSo0RNNI82EeiCZ8VkQgmDP+dhUNJeysJRWDLuKDzzZ/FxSjFtNj4DaXU9L41rhN4NSJGLrSz1M8qy2QKrANA=
 services:
    - rabbitmq
 install: true
-
 before_script:
-  - sudo apt-get install zookeeper
-  - mysql -e 'create database app_catalog;'
-  - cd scripts
-  - source replace_props.sh
-  - cd -
-
+   - sudo apt-get install zookeeper
+   - mysql -e 'create database app_catalog;'
+   - cd scripts
+   - source replace_props.sh
+   - cd -
 script: cd . && echo "mvn -e clean install"
-
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR
-  - tar -cf CodeDeployTest.tar . || true
-  - mkdir -p "dpl_cd_upload"
-  - mv CodeDeployTest.tar dpl_cd_upload/CodeDeployTest.tar || true
-
+   - cd $TRAVIS_BUILD_DIR
+   - tar -cf CodeDeployTest.tar . || true
+   - mkdir -p "dpl_cd_upload"
+   - mv CodeDeployTest.tar dpl_cd_upload/CodeDeployTest.tar || true
 deploy:
-  - provider: s3
-    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
-    secret_access_key: $AWS_SECRET_KEY
-    local_dir: dpl_cd_upload
-    bucket: airavata-develop
-    region: us-east-1
-    skip_cleanup: true
-    acl: public_read
-    detect_encoding: true
-    on:
-      repo: marpierc/CodeDeployTest
-      all_branches: true
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: airavata-develop
-    key: CodeDeployTest.tar
-    bundle_type: tar
-    application: MEP-Test-CodeDeploy
-    deployment_group: MEP-Test-CodeDeploy
-    region: us-east-1
-    on:
-      repo: marpierc/CodeDeployTest
-      all_branches: true
+   - provider: s3
+     access_key_id: $AWS_ACCESS_KEY
+     secret_access_key: $AWS_SECRET_KEY
+     local_dir: dpl_cd_upload
+     bucket: airavata-develop
+     region: us-east-1
+     skip_cleanup: true
+     acl: public_read
+     detect_encoding: true
+     on:
+       repo: marpierc/CodeDeployTest
+       all_branches: true
+   - provider: codedeploy
+     access_key_id: $AWS_ACCESS_KEY
+     secret_access_key: $AWS_SECRET_KEY
+     bucket: airavata-develop
+     key: CodeDeployTest.tar
+     bundle_type: tar
+     application: MEP-Test-CodeDeploy
+     deployment_group: MEP-Test-CodeDeploy
+     region: us-east-1
+     on:
+       repo: marpierc/CodeDeployTest
+       all_branches: true
 after_deploy:
-  - echo "Performing after deploy procedures..."
+   - echo "Performing after deploy procedures..."
 notifications:
   email:
     recipients:
-      - marpierc@iu.edu
+       - marpierc@iu.edu
+
