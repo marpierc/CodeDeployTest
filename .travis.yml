@@ -10,8 +10,8 @@ services:
 install: true
 before_script:
    - sudo apt-get install zookeeper
-   - mysql -e 'create database app_catalog;'
-   - mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
+   - sudo mysql -e 'create database app_catalog;'
+   - sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
    - cd scripts
    - source replace_props.sh
    - cd -
