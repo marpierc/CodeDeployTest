@@ -6,7 +6,10 @@ addons:
   mariadb: '10.1'
   sauce_connect: true
 services:
-   - rabbitmq
+   rabbitmq
+before_install:
+   - cd scripts
+   - source before-install.sh
 install: true
 before_script:
    - sudo apt-get install zookeeper
