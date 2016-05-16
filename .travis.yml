@@ -13,7 +13,7 @@ before_script:
    #- sudo mysql -e 'create database app_catalog;'
    #- sudo mysql -e 'grant all privileges on app_catalog.⁎ to "airavata'@'%" identified by "airavata";'
    - cd scripts
-   - source db-setup.sh
+   - sudo source db-setup.sh
    - source before-install.sh	
    - cd -
 script: cd . && echo "mvn -e clean install"
