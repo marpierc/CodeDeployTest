@@ -11,11 +11,9 @@ install: true
 before_script:
    # Zookeeper
    - sudo apt-get install zookeeper
-   # Set up rabbitmq 
+   # Execute scripts
+   - cd $TRAVIS_BUILD_DIR/scripts	
    - source rabbitmq-setup.sh
-   # Database setup. You can also run these with sudo mysql -e <cmd_to_run>
-   - cd $TRAVIS_BUILD_DIR/scripts
-   - source before-install.sh		
    - source db-setup.sh
 script:
     - cd $TRAVIS_BUILD_DIR
@@ -55,7 +53,7 @@ after_deploy:
 notifications:
   email:
     recipients:
-       - marpierc@iu.edu
+       - # marpierc@iu.edu
 env:
    global:
       - secure: "FsNVgv54o/oelQfkOCcDfw1wIgtBcsp4J5OyFzNriblfjGegoOTDvHTVgEAxzdZ+g1jp/ZNNC2o0vufQbB3GT0SpQ8zXytxXH11XCezNEJsf56Pk6RnDpbpr1m4R2LoRp4Faau1GWPvwGdHrkS3u+iEVmH6SHchAA8OKFLqsH1DY8oGn66jhqkmotIzmXx7Il3j4/kEkSvFiNV7gPyh5YUEtvYgHoVBjS6MmNQIPuEOVDIq6/DIJ/O0gO/gSHRXnJeHnL7iduBPMnPsSTJQ45kqMDLkgsiiKT2t2UYm8pfxKjRbC+lgbkAZ7lOOLtehFEnRhiff4y5ZYYWY+z+B0/DKsjb+opEGOPL4z96ZAU+etgzxrNlnt9k4TsUjBUn9doTe7DzviIFDIFm+ZVvz0iwL0/qJURw2ENmiNH93Yv2HqfwHelL5DNNwy+CHyJQnMCP2UcLSGDwodxKO7gJdcXJ3hWOSmh8dMz3bx/jOnleh6HzFEHceTxC9qkl0kdAnHJG6PlzkacY8jFmLc21siiLW7I7Y5vy5WUglJbgE+KdtDJwehUNEVr+nZ56kr5Wphl8dlByaVmVIcE+8TboBHzfGTGBiQhxQb9Hln6Ct5opsWhh2FTEzG0ouARQuO3D+j/ekfoh2+cxNofsN19D+JdHngcttx9BYOM18CLHcN7pk="
