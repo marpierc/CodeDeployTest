@@ -12,7 +12,7 @@ before_script:
    # Zookeeper
    - sudo apt-get install zookeeper
    - sudo apt-get install zookeeperd
-   - sudo service zookeeper start
+   - sudo service zookeeper restart
    # Execute scripts
    - cd $TRAVIS_BUILD_DIR/scripts	
    - source rabbitmq-setup.sh
