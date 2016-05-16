@@ -12,15 +12,25 @@ before_script:
    # Zookeeper
    - sudo apt-get install zookeeper
    - sudo apt-get install zookeeperd
-   - service zookeeper start
+   - sudo service zookeeper start
    # Execute scripts
    - cd $TRAVIS_BUILD_DIR/scripts	
    - source rabbitmq-setup.sh
    - source db-setup.sh
+   #PHP
+   - sudo apt-get httpd
+   - sudo apt-get php-soap
+
 script:
-    - cd $TRAVIS_BUILD_DIR
     # Build the code
+    - cd $TRAVIS_BUILD_DIR
+    - echo $TRAVIS_BUILD_DIR    
     - echo "mvn -e clean install"
+    # Update airavata-server.properties
+    - echo "Updating airavata-server.properties"
+    # Start the Airavata server
+    - echo "Starting the server."
+    # 
     
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
