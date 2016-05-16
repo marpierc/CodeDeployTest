@@ -18,8 +18,9 @@ before_script:
    - source rabbitmq-setup.sh
    - source db-setup.sh
    #PHP
-   - sudo apt-get httpd
+   - sudo apt-get apache2
    - sudo apt-get php-soap
+   - sudo apt-get php
 
 script:
     # Build the code
