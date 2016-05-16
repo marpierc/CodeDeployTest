@@ -12,9 +12,9 @@ before_script:
    # Zookeeper
    - sudo apt-get install zookeeper
    # Set up rabbitmq 
-   - rabbitmqctl add_user airavata airavata
-   - rabbitmqctl add_vhost messaging
-   - rabbitmqctl set_permissions -p messaging airavata "." "." ".*"
+   - sudo rabbitmqctl add_user airavata airavata
+   - sudo rabbitmqctl add_vhost messaging
+   - sudo rabbitmqctl set_permissions -p messaging airavata "." "." ".*"
    # Database setup. You can also run these with sudo mysql -e <cmd_to_run>
    - cd $TRAVIS_BUILD_DIR/scripts
    - source before-install.sh		
