@@ -18,6 +18,9 @@ before_script:
    - source rabbitmq-setup.sh
    - source db-setup.sh
    #PHP
+   # Do the following to get PHP 5.4 instead of 5.3.
+   - sudo apt-get install python-software-properties
+   - sudo add-apt-repository ppa:ondrej/php5-oldstable
    - sudo apt-get install apache2
    - sudo apt-get install php-soap
    - sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-mysql
@@ -45,9 +48,9 @@ script:
     - mkdir gateway-user-data
     - composer update
     - cp ./app/config/pga_config.php.template ./app/config/pga_config.php
-    - sed -i '.orig' "s#gw56.iu.xsede.org#localhost#g" ./app/config/pga_config.php
-    - sed -i '.orig' "s#\'airavata-server\' => \'gw56.iu.xsede.org\'#\'airavata-server\' => \'localhost\'#g" ./app/config/pga_config.php
-    - sed -i '.orig' "s#\'gateway-id\' => \'default\'#\'gateway-id\' => \'php_reference_gateway\'#g" ./app/config/pga_config.php
+    #- sed -i  "s#gw56.iu.xsede.org#localhost#g" ./app/config/pga_config.php
+    - sed -i "s#\'airavata-server\' => \'gw56.iu.xsede.org\'#\'airavata-server\' => \'localhost\'#g" ./app/config/pga_config.php
+    - sed -i "s#\'gateway-id\' => \'default\'#\'gateway-id\' => \'php_reference_gateway\'#g" ./app/config/pga_config.php
 
     
 before_deploy:
