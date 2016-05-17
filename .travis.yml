@@ -9,7 +9,6 @@ services:
    rabbitmq
 install: true
 before_script:
-   - more /etc/lsb-release 
    # Zookeeper
    - sudo apt-get install zookeeper
    - sudo apt-get install zookeeperd
@@ -35,7 +34,7 @@ before_script:
    - source composer-install.sh
    - sudo a2enmod rewrite
    - sudo service apache2 restart
-   - sudo cat /etc/php.ini
+   - sudo cat /etc/php5/apache2/php.ini
 
 script:
     # Build the code
