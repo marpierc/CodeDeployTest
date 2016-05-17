@@ -22,9 +22,13 @@ before_script:
    - sudo apt-get install apache2
    - sudo apt-get install python-software-properties
    - sudo add-apt-repository -y ppa:ondrej/php5-oldstable
-   - sudo apt-get install php-soap
-   - sudo apt-get -q -y install php5 libapache2-mod-php5 php5-mcrypt php5-mysql
+   - sudo apt-get update
+   - sudo apt-cache policy php5
+   - sudo apt-get -q -y install php5 
    - sudo apt-get install unzip curl openssl
+   - sudo apt-get install openssl
+   - sudo apt-get install php5-mcrypt
+   - sudo apt-get install php-soap
    - php -v; apache2 -v
    - cd $TRAVIS_BUILD_DIR/scripts
    - source composer-install.sh
