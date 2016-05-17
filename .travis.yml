@@ -34,8 +34,10 @@ script:
     # Start the Airavata server
     - echo "Starting the server."
     # Get the PGA
-    - cd $TRAVIS_BUILD_DIR    
+    - cd /var/www/html    
     - git clone https://github.com/apache/airavata-php-gateway.git
+    - mkdir gateway-user-data
+    - composer update
     
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
