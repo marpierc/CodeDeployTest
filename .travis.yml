@@ -20,9 +20,13 @@ before_script:
    #PHP
    - sudo apt-get install apache2
    - sudo apt-get install php-soap
-   - sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+   - sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-mysql
+   - sudo apt-get install unzip curl openssl
+   - php -v; apache2 -v
    - cd $TRAVIS_BUILD_DIR/scripts
    - source composer-install.sh
+   - sudo a2enmod rewrite
+   - sudo service apache2 restart
 
 script:
     # Build the code
@@ -36,12 +40,13 @@ script:
     # Get the PGA
     - cd /var/www/
     - sudo git clone https://github.com/apache/airavata-php-gateway.git
+    - sudo chown -R $USER:$USER /var/www/airavata-php-gateway
     - cd /var/www/airavata-php-gateway
-    - sudo mkdir gateway-user-data
+    - mkdir gateway-user-data
     - composer update
-    - sudo cp ./app/config/pga_config.php.template ./app/config/pga_config.php
-    - sudo sed -i '' "s#gw56.iu.xsede.org#localhost#g" app/config/pga_config.php
-    - sudo sed -i '' "s#'gateway-id' => 'default'#'gateway-id' => 'php_reference_gateway'#g" app/config/pga_config.php
+    - cp ./app/config/pga_config.php.template ./app/config/pga_config.php
+    - sed -i '' "s#'airavata-server' => 'gw56.iu.xsede.org'#'airavata-server' => 'localhost#g" app/config/pga_config.php
+    - sed -i '' "s#'gateway-id' => 'default'#'gateway-id' => 'php_reference_gateway'#g" app/config/pga_config.php
 
     
 before_deploy:
