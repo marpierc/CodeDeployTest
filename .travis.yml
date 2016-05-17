@@ -25,7 +25,7 @@ before_script:
    - sudo apt-get update
    - sudo apt-cache policy php5
    - sudo apt-get -q -y install php5 
-   - sudo apt-get install unzip curl openssl
+   - sudo apt-get install unzip curl 
    - sudo apt-get install openssl
    - sudo apt-get install php5-mcrypt
    - sudo apt-get install php-soap
@@ -34,6 +34,7 @@ before_script:
    - source composer-install.sh
    - sudo a2enmod rewrite
    - sudo service apache2 restart
+   - sudo cat /etc/php.ini
 
 script:
     # Build the code
