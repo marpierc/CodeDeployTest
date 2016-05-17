@@ -34,8 +34,9 @@ script:
     # Start the Airavata server
     - echo "Starting the server."
     # Get the PGA
-    - cd /var/www/html    
+    - cd /var/www/
     - git clone https://github.com/apache/airavata-php-gateway.git
+    - cd /var/www/airavata-php-gateway
     - mkdir gateway-user-data
     - composer update
     
