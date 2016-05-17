@@ -35,10 +35,14 @@ script:
     - echo "Starting the server."
     # Get the PGA
     - cd /var/www/
-    - git clone https://github.com/apache/airavata-php-gateway.git
+    - sudo git clone https://github.com/apache/airavata-php-gateway.git
     - cd /var/www/airavata-php-gateway
-    - mkdir gateway-user-data
+    - sudo mkdir gateway-user-data
     - composer update
+    - sudo cp ./app/config/pga_config.php.template ./app/config/pga_config.php
+    - sudo sed -i '' "s#gw56.iu.xsede.org#localhost#g" app/config/pga_config.php
+    - sudo sed -i '' "s#'gateway-id' => 'default'#'gateway-id' => 'php_reference_gateway'#g" app/config/pga_config.php
+
     
 before_deploy:
    - cd $TRAVIS_BUILD_DIR
